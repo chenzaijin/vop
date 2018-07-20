@@ -1,0 +1,43 @@
+server:
+  port: 8080
+
+spring:
+    datasource:
+        name: base
+        url: jdbc:oracle:thin:@172.16.2.220:1521:pbsbossdev
+        username: base
+        password: base
+        # 使用druid数据源
+        type: com.alibaba.druid.pool.DruidDataSource
+        #driver-class-name: com.mysql.jdbc.Driver
+        #filters: stat
+        #maxActive: 20
+        #initialSize: 1
+        ##maxWait: 60000
+        #minIdle: 1
+        #timeBetweenEvictionRunsMillis: 60000
+        #minEvictableIdleTimeMillis: 300000
+        #validationQuery: select 'x'
+       # testWhileIdle: true
+       # testOnBorrow: false
+       # testOnReturn: false
+       # poolPreparedStatements: true
+        #maxOpenPreparedStatements: 20
+
+    mvc:
+        view:
+          # 页面默认前缀目录
+          prefix: /WEB-INF/jsp/
+          # 响应页面默认后缀
+          suffix: .jsp
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.vop.model
+
+#pagehelper分页插件
+pagehelper:
+    helperDialect: oracle
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
