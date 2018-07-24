@@ -10,8 +10,8 @@
     <!--<sql id="Base_Column_List" >
         id, user_name, password, age
     </sql>-->
-    <select id="getProvince" resultType="List" >
-        select * from base.BS_DISTRICT where district_name='河北省'
+    <select id="test" resultType="java.lang.String" >
+        select district_name from base.BS_DISTRICT where district_name='河北省'
     </select>
 
 
