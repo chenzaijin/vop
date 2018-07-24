@@ -2,7 +2,7 @@ package com.example.vop.model;
 
 import java.io.Serializable;
 
-public class AttachmentEntity implements Serializable {
+public class SupportAttachmentEntity implements Serializable {
     private Long attachmentId;
 
     private String supportId;
@@ -76,7 +76,7 @@ public class AttachmentEntity implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        AttachmentEntity other = (AttachmentEntity) that;
+        SupportAttachmentEntity other = (SupportAttachmentEntity) that;
         return (this.getAttachmentId() == null ? other.getAttachmentId() == null : this.getAttachmentId().equals(other.getAttachmentId()))
             && (this.getSupportId() == null ? other.getSupportId() == null : this.getSupportId().equals(other.getSupportId()))
             && (this.getDealId() == null ? other.getDealId() == null : this.getDealId().equals(other.getDealId()))
