@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.vop.dao.mapper.SupportContentEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.example.vop.model.SupportContentEntity" >
+    <id column="SUPPORT_CONTENT_ID" property="supportContentId" jdbcType="DECIMAL" />
+    <result column="SUPORT_ID" property="suportId" jdbcType="VARCHAR" />
+    <result column="SUPPORT_LEVEL" property="supportLevel" jdbcType="VARCHAR" />
+    <result column="ISSUE_PROVINCE" property="issueProvince" jdbcType="VARCHAR" />
+    <result column="ISSUE_CITY" property="issueCity" jdbcType="VARCHAR" />
+    <result column="PHONE_NUMBER_PROVINCE" property="phoneNumberProvince" jdbcType="VARCHAR" />
+    <result column="PHONE_NUMBER_CITY" property="phoneNumberCity" jdbcType="VARCHAR" />
+    <result column="REPETITION" property="repetition" jdbcType="DECIMAL" />
+    <result column="ORIGINAL_SUPPORT_ID" property="originalSupportId" jdbcType="VARCHAR" />
+    <result column="REPETITION_DESCRIPTION" property="repetitionDescription" jdbcType="VARCHAR" />
+    <result column="PRESENT_CONDITION" property="presentCondition" jdbcType="VARCHAR" />
+    <result column="REQUIREMENTS" property="requirements" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SUPPORT_CONTENT_ID, SUPORT_ID, SUPPORT_LEVEL, ISSUE_PROVINCE, ISSUE_CITY, PHONE_NUMBER_PROVINCE, 
+    PHONE_NUMBER_CITY, REPETITION, ORIGINAL_SUPPORT_ID, REPETITION_DESCRIPTION, PRESENT_CONDITION, 
+    REQUIREMENTS
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.vop.model.SupportContentEntityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from OIP.SUPPORT_CONTENT_ENTITY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from OIP.SUPPORT_CONTENT_ENTITY
+    where SUPPORT_CONTENT_ID = #{supportContentId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from OIP.SUPPORT_CONTENT_ENTITY
+    where SUPPORT_CONTENT_ID = #{supportContentId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.example.vop.model.SupportContentEntity" >
+    insert into OIP.SUPPORT_CONTENT_ENTITY (SUPPORT_CONTENT_ID, SUPORT_ID, SUPPORT_LEVEL, 
+      ISSUE_PROVINCE, ISSUE_CITY, PHONE_NUMBER_PROVINCE, 
+      PHONE_NUMBER_CITY, REPETITION, ORIGINAL_SUPPORT_ID, 
+      REPETITION_DESCRIPTION, PRESENT_CONDITION, 
+      REQUIREMENTS)
+    values (#{supportContentId,jdbcType=DECIMAL}, #{suportId,jdbcType=VARCHAR}, #{supportLevel,jdbcType=VARCHAR}, 
+      #{issueProvince,jdbcType=VARCHAR}, #{issueCity,jdbcType=VARCHAR}, #{phoneNumberProvince,jdbcType=VARCHAR}, 
+      #{phoneNumberCity,jdbcType=VARCHAR}, #{repetition,jdbcType=DECIMAL}, #{originalSupportId,jdbcType=VARCHAR}, 
+      #{repetitionDescription,jdbcType=VARCHAR}, #{presentCondition,jdbcType=VARCHAR}, 
+      #{requirements,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.vop.model.SupportContentEntity" >
+    insert into OIP.SUPPORT_CONTENT_ENTITY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="supportContentId != null" >
+        SUPPORT_CONTENT_ID,
+      </if>
+      <if test="suportId != null" >
+        SUPORT_ID,
+      </if>
+      <if test="supportLevel != null" >
+        SUPPORT_LEVEL,
+      </if>
+      <if test="issueProvince != null" >
+        ISSUE_PROVINCE,
+      </if>
+      <if test="issueCity != null" >
+        ISSUE_CITY,
+      </if>
+      <if test="phoneNumberProvince != null" >
+        PHONE_NUMBER_PROVINCE,
+      </if>
+      <if test="phoneNumberCity != null" >
+        PHONE_NUMBER_CITY,
+      </if>
+      <if test="repetition != null" >
+        REPETITION,
+      </if>
+      <if test="originalSupportId != null" >
+        ORIGINAL_SUPPORT_ID,
+      </if>
+      <if test="repetitionDescription != null" >
+        REPETITION_DESCRIPTION,
+      </if>
+      <if test="presentCondition != null" >
+        PRESENT_CONDITION,
+      </if>
+      <if test="requirements != null" >
+        REQUIREMENTS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="supportContentId != null" >
+        #{supportContentId,jdbcType=DECIMAL},
+      </if>
+      <if test="suportId != null" >
+        #{suportId,jdbcType=VARCHAR},
+      </if>
+      <if test="supportLevel != null" >
+        #{supportLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="issueProvince != null" >
+        #{issueProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="issueCity != null" >
+        #{issueCity,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumberProvince != null" >
+        #{phoneNumberProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumberCity != null" >
+        #{phoneNumberCity,jdbcType=VARCHAR},
+      </if>
+      <if test="repetition != null" >
+        #{repetition,jdbcType=DECIMAL},
+      </if>
+      <if test="originalSupportId != null" >
+        #{originalSupportId,jdbcType=VARCHAR},
+      </if>
+      <if test="repetitionDescription != null" >
+        #{repetitionDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="presentCondition != null" >
+        #{presentCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="requirements != null" >
+        #{requirements,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.vop.model.SupportContentEntityExample" resultType="java.lang.Integer" >
+    select count(*) from OIP.SUPPORT_CONTENT_ENTITY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.vop.model.SupportContentEntity" >
+    update OIP.SUPPORT_CONTENT_ENTITY
+    <set >
+      <if test="suportId != null" >
+        SUPORT_ID = #{suportId,jdbcType=VARCHAR},
+      </if>
+      <if test="supportLevel != null" >
+        SUPPORT_LEVEL = #{supportLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="issueProvince != null" >
+        ISSUE_PROVINCE = #{issueProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="issueCity != null" >
+        ISSUE_CITY = #{issueCity,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumberProvince != null" >
+        PHONE_NUMBER_PROVINCE = #{phoneNumberProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumberCity != null" >
+        PHONE_NUMBER_CITY = #{phoneNumberCity,jdbcType=VARCHAR},
+      </if>
+      <if test="repetition != null" >
+        REPETITION = #{repetition,jdbcType=DECIMAL},
+      </if>
+      <if test="originalSupportId != null" >
+        ORIGINAL_SUPPORT_ID = #{originalSupportId,jdbcType=VARCHAR},
+      </if>
+      <if test="repetitionDescription != null" >
+        REPETITION_DESCRIPTION = #{repetitionDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="presentCondition != null" >
+        PRESENT_CONDITION = #{presentCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="requirements != null" >
+        REQUIREMENTS = #{requirements,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SUPPORT_CONTENT_ID = #{supportContentId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.vop.model.SupportContentEntity" >
+    update OIP.SUPPORT_CONTENT_ENTITY
+    set SUPORT_ID = #{suportId,jdbcType=VARCHAR},
+      SUPPORT_LEVEL = #{supportLevel,jdbcType=VARCHAR},
+      ISSUE_PROVINCE = #{issueProvince,jdbcType=VARCHAR},
+      ISSUE_CITY = #{issueCity,jdbcType=VARCHAR},
+      PHONE_NUMBER_PROVINCE = #{phoneNumberProvince,jdbcType=VARCHAR},
+      PHONE_NUMBER_CITY = #{phoneNumberCity,jdbcType=VARCHAR},
+      REPETITION = #{repetition,jdbcType=DECIMAL},
+      ORIGINAL_SUPPORT_ID = #{originalSupportId,jdbcType=VARCHAR},
+      REPETITION_DESCRIPTION = #{repetitionDescription,jdbcType=VARCHAR},
+      PRESENT_CONDITION = #{presentCondition,jdbcType=VARCHAR},
+      REQUIREMENTS = #{requirements,jdbcType=VARCHAR}
+    where SUPPORT_CONTENT_ID = #{supportContentId,jdbcType=DECIMAL}
+  </update>
+</mapper>

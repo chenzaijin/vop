@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.vop.dao.mapper.VasSupportEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.example.vop.model.VasSupportEntity" >
+    <id column="VAS_SUPPORT_ID" property="vasSupportId" jdbcType="DECIMAL" />
+    <result column="SUPPORT_ID" property="supportId" jdbcType="VARCHAR" />
+    <result column="SUPPORT_CONTENT_ID" property="supportContentId" jdbcType="DECIMAL" />
+    <result column="SYSTEM_TYPE" property="systemType" jdbcType="VARCHAR" />
+    <result column="VAS_TYPE" property="vasType" jdbcType="DECIMAL" />
+    <result column="VAS_DESCRIPTION" property="vasDescription" jdbcType="VARCHAR" />
+    <result column="SSUE_DESCRIPTION" property="ssueDescription" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    VAS_SUPPORT_ID, SUPPORT_ID, SUPPORT_CONTENT_ID, SYSTEM_TYPE, VAS_TYPE, VAS_DESCRIPTION, 
+    SSUE_DESCRIPTION
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.vop.model.VasSupportEntityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from OIP.VAS_SUPPORT_ENTITY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from OIP.VAS_SUPPORT_ENTITY
+    where VAS_SUPPORT_ID = #{vasSupportId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from OIP.VAS_SUPPORT_ENTITY
+    where VAS_SUPPORT_ID = #{vasSupportId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.example.vop.model.VasSupportEntity" >
+    insert into OIP.VAS_SUPPORT_ENTITY (VAS_SUPPORT_ID, SUPPORT_ID, SUPPORT_CONTENT_ID, 
+      SYSTEM_TYPE, VAS_TYPE, VAS_DESCRIPTION, 
+      SSUE_DESCRIPTION)
+    values (#{vasSupportId,jdbcType=DECIMAL}, #{supportId,jdbcType=VARCHAR}, #{supportContentId,jdbcType=DECIMAL}, 
+      #{systemType,jdbcType=VARCHAR}, #{vasType,jdbcType=DECIMAL}, #{vasDescription,jdbcType=VARCHAR}, 
+      #{ssueDescription,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.vop.model.VasSupportEntity" >
+    insert into OIP.VAS_SUPPORT_ENTITY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="vasSupportId != null" >
+        VAS_SUPPORT_ID,
+      </if>
+      <if test="supportId != null" >
+        SUPPORT_ID,
+      </if>
+      <if test="supportContentId != null" >
+        SUPPORT_CONTENT_ID,
+      </if>
+      <if test="systemType != null" >
+        SYSTEM_TYPE,
+      </if>
+      <if test="vasType != null" >
+        VAS_TYPE,
+      </if>
+      <if test="vasDescription != null" >
+        VAS_DESCRIPTION,
+      </if>
+      <if test="ssueDescription != null" >
+        SSUE_DESCRIPTION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="vasSupportId != null" >
+        #{vasSupportId,jdbcType=DECIMAL},
+      </if>
+      <if test="supportId != null" >
+        #{supportId,jdbcType=VARCHAR},
+      </if>
+      <if test="supportContentId != null" >
+        #{supportContentId,jdbcType=DECIMAL},
+      </if>
+      <if test="systemType != null" >
+        #{systemType,jdbcType=VARCHAR},
+      </if>
+      <if test="vasType != null" >
+        #{vasType,jdbcType=DECIMAL},
+      </if>
+      <if test="vasDescription != null" >
+        #{vasDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="ssueDescription != null" >
+        #{ssueDescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.vop.model.VasSupportEntityExample" resultType="java.lang.Integer" >
+    select count(*) from OIP.VAS_SUPPORT_ENTITY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.vop.model.VasSupportEntity" >
+    update OIP.VAS_SUPPORT_ENTITY
+    <set >
+      <if test="supportId != null" >
+        SUPPORT_ID = #{supportId,jdbcType=VARCHAR},
+      </if>
+      <if test="supportContentId != null" >
+        SUPPORT_CONTENT_ID = #{supportContentId,jdbcType=DECIMAL},
+      </if>
+      <if test="systemType != null" >
+        SYSTEM_TYPE = #{systemType,jdbcType=VARCHAR},
+      </if>
+      <if test="vasType != null" >
+        VAS_TYPE = #{vasType,jdbcType=DECIMAL},
+      </if>
+      <if test="vasDescription != null" >
+        VAS_DESCRIPTION = #{vasDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="ssueDescription != null" >
+        SSUE_DESCRIPTION = #{ssueDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where VAS_SUPPORT_ID = #{vasSupportId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.vop.model.VasSupportEntity" >
+    update OIP.VAS_SUPPORT_ENTITY
+    set SUPPORT_ID = #{supportId,jdbcType=VARCHAR},
+      SUPPORT_CONTENT_ID = #{supportContentId,jdbcType=DECIMAL},
+      SYSTEM_TYPE = #{systemType,jdbcType=VARCHAR},
+      VAS_TYPE = #{vasType,jdbcType=DECIMAL},
+      VAS_DESCRIPTION = #{vasDescription,jdbcType=VARCHAR},
+      SSUE_DESCRIPTION = #{ssueDescription,jdbcType=VARCHAR}
+    where VAS_SUPPORT_ID = #{vasSupportId,jdbcType=DECIMAL}
+  </update>
+</mapper>

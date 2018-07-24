@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.vop.dao.mapper.SupportPushMapper" >
+  <resultMap id="BaseResultMap" type="com.example.vop.model.SupportPush" >
+    <id column="PUSH_ID" property="pushId" jdbcType="VARCHAR" />
+    <result column="PUSH_TYPE" property="pushType" jdbcType="VARCHAR" />
+    <result column="PUSH_CONTENT" property="pushContent" jdbcType="VARCHAR" />
+    <result column="PUSH_TIME" property="pushTime" jdbcType="TIMESTAMP" />
+    <result column="PHONE_NUMBER" property="phoneNumber" jdbcType="VARCHAR" />
+    <result column="CONTACT" property="contact" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="API_NAME" property="apiName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PUSH_ID, PUSH_TYPE, PUSH_CONTENT, PUSH_TIME, PHONE_NUMBER, CONTACT, REMARK, API_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.vop.model.SupportPushExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from OIP.SUPPORT_PUSH
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from OIP.SUPPORT_PUSH
+    where PUSH_ID = #{pushId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from OIP.SUPPORT_PUSH
+    where PUSH_ID = #{pushId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.vop.model.SupportPush" >
+    insert into OIP.SUPPORT_PUSH (PUSH_ID, PUSH_TYPE, PUSH_CONTENT, 
+      PUSH_TIME, PHONE_NUMBER, CONTACT, 
+      REMARK, API_NAME)
+    values (#{pushId,jdbcType=VARCHAR}, #{pushType,jdbcType=VARCHAR}, #{pushContent,jdbcType=VARCHAR}, 
+      #{pushTime,jdbcType=TIMESTAMP}, #{phoneNumber,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{apiName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.vop.model.SupportPush" >
+    insert into OIP.SUPPORT_PUSH
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pushId != null" >
+        PUSH_ID,
+      </if>
+      <if test="pushType != null" >
+        PUSH_TYPE,
+      </if>
+      <if test="pushContent != null" >
+        PUSH_CONTENT,
+      </if>
+      <if test="pushTime != null" >
+        PUSH_TIME,
+      </if>
+      <if test="phoneNumber != null" >
+        PHONE_NUMBER,
+      </if>
+      <if test="contact != null" >
+        CONTACT,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="apiName != null" >
+        API_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pushId != null" >
+        #{pushId,jdbcType=VARCHAR},
+      </if>
+      <if test="pushType != null" >
+        #{pushType,jdbcType=VARCHAR},
+      </if>
+      <if test="pushContent != null" >
+        #{pushContent,jdbcType=VARCHAR},
+      </if>
+      <if test="pushTime != null" >
+        #{pushTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="phoneNumber != null" >
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="apiName != null" >
+        #{apiName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.vop.model.SupportPushExample" resultType="java.lang.Integer" >
+    select count(*) from OIP.SUPPORT_PUSH
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.vop.model.SupportPush" >
+    update OIP.SUPPORT_PUSH
+    <set >
+      <if test="pushType != null" >
+        PUSH_TYPE = #{pushType,jdbcType=VARCHAR},
+      </if>
+      <if test="pushContent != null" >
+        PUSH_CONTENT = #{pushContent,jdbcType=VARCHAR},
+      </if>
+      <if test="pushTime != null" >
+        PUSH_TIME = #{pushTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="phoneNumber != null" >
+        PHONE_NUMBER = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        CONTACT = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="apiName != null" >
+        API_NAME = #{apiName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PUSH_ID = #{pushId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.vop.model.SupportPush" >
+    update OIP.SUPPORT_PUSH
+    set PUSH_TYPE = #{pushType,jdbcType=VARCHAR},
+      PUSH_CONTENT = #{pushContent,jdbcType=VARCHAR},
+      PUSH_TIME = #{pushTime,jdbcType=TIMESTAMP},
+      PHONE_NUMBER = #{phoneNumber,jdbcType=VARCHAR},
+      CONTACT = #{contact,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      API_NAME = #{apiName,jdbcType=VARCHAR}
+    where PUSH_ID = #{pushId,jdbcType=VARCHAR}
+  </update>
+</mapper>

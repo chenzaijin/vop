@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.vop.dao.mapper.RechargeSupportEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.example.vop.model.RechargeSupportEntity" >
+    <id column="RECHARGE_SUPPORT_ID" property="rechargeSupportId" jdbcType="DECIMAL" />
+    <result column="SUPORT_ID" property="suportId" jdbcType="VARCHAR" />
+    <result column="SUPPORT_CONTENT_ID" property="supportContentId" jdbcType="DECIMAL" />
+    <result column="PAYING_ARRIVE" property="payingArrive" jdbcType="DECIMAL" />
+    <result column="PHONE_NUMBER" property="phoneNumber" jdbcType="VARCHAR" />
+    <result column="CARD_NUMBER" property="cardNumber" jdbcType="VARCHAR" />
+    <result column="RECHARGE_DATE" property="rechargeDate" jdbcType="DATE" />
+    <result column="PROCESS_SERIAL" property="processSerial" jdbcType="VARCHAR" />
+    <result column="PAYAMOUNT" property="payamount" jdbcType="DECIMAL" />
+    <result column="ISSUE_DESCRIPTION" property="issueDescription" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    RECHARGE_SUPPORT_ID, SUPORT_ID, SUPPORT_CONTENT_ID, PAYING_ARRIVE, PHONE_NUMBER, 
+    CARD_NUMBER, RECHARGE_DATE, PROCESS_SERIAL, PAYAMOUNT, ISSUE_DESCRIPTION
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.vop.model.RechargeSupportEntityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from OIP.RECHARGE_SUPPORT_ENTITY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from OIP.RECHARGE_SUPPORT_ENTITY
+    where RECHARGE_SUPPORT_ID = #{rechargeSupportId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from OIP.RECHARGE_SUPPORT_ENTITY
+    where RECHARGE_SUPPORT_ID = #{rechargeSupportId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.example.vop.model.RechargeSupportEntity" >
+    insert into OIP.RECHARGE_SUPPORT_ENTITY (RECHARGE_SUPPORT_ID, SUPORT_ID, SUPPORT_CONTENT_ID, 
+      PAYING_ARRIVE, PHONE_NUMBER, CARD_NUMBER, 
+      RECHARGE_DATE, PROCESS_SERIAL, PAYAMOUNT, 
+      ISSUE_DESCRIPTION)
+    values (#{rechargeSupportId,jdbcType=DECIMAL}, #{suportId,jdbcType=VARCHAR}, #{supportContentId,jdbcType=DECIMAL}, 
+      #{payingArrive,jdbcType=DECIMAL}, #{phoneNumber,jdbcType=VARCHAR}, #{cardNumber,jdbcType=VARCHAR}, 
+      #{rechargeDate,jdbcType=DATE}, #{processSerial,jdbcType=VARCHAR}, #{payamount,jdbcType=DECIMAL}, 
+      #{issueDescription,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.vop.model.RechargeSupportEntity" >
+    insert into OIP.RECHARGE_SUPPORT_ENTITY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rechargeSupportId != null" >
+        RECHARGE_SUPPORT_ID,
+      </if>
+      <if test="suportId != null" >
+        SUPORT_ID,
+      </if>
+      <if test="supportContentId != null" >
+        SUPPORT_CONTENT_ID,
+      </if>
+      <if test="payingArrive != null" >
+        PAYING_ARRIVE,
+      </if>
+      <if test="phoneNumber != null" >
+        PHONE_NUMBER,
+      </if>
+      <if test="cardNumber != null" >
+        CARD_NUMBER,
+      </if>
+      <if test="rechargeDate != null" >
+        RECHARGE_DATE,
+      </if>
+      <if test="processSerial != null" >
+        PROCESS_SERIAL,
+      </if>
+      <if test="payamount != null" >
+        PAYAMOUNT,
+      </if>
+      <if test="issueDescription != null" >
+        ISSUE_DESCRIPTION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rechargeSupportId != null" >
+        #{rechargeSupportId,jdbcType=DECIMAL},
+      </if>
+      <if test="suportId != null" >
+        #{suportId,jdbcType=VARCHAR},
+      </if>
+      <if test="supportContentId != null" >
+        #{supportContentId,jdbcType=DECIMAL},
+      </if>
+      <if test="payingArrive != null" >
+        #{payingArrive,jdbcType=DECIMAL},
+      </if>
+      <if test="phoneNumber != null" >
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNumber != null" >
+        #{cardNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeDate != null" >
+        #{rechargeDate,jdbcType=DATE},
+      </if>
+      <if test="processSerial != null" >
+        #{processSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="payamount != null" >
+        #{payamount,jdbcType=DECIMAL},
+      </if>
+      <if test="issueDescription != null" >
+        #{issueDescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.vop.model.RechargeSupportEntityExample" resultType="java.lang.Integer" >
+    select count(*) from OIP.RECHARGE_SUPPORT_ENTITY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.vop.model.RechargeSupportEntity" >
+    update OIP.RECHARGE_SUPPORT_ENTITY
+    <set >
+      <if test="suportId != null" >
+        SUPORT_ID = #{suportId,jdbcType=VARCHAR},
+      </if>
+      <if test="supportContentId != null" >
+        SUPPORT_CONTENT_ID = #{supportContentId,jdbcType=DECIMAL},
+      </if>
+      <if test="payingArrive != null" >
+        PAYING_ARRIVE = #{payingArrive,jdbcType=DECIMAL},
+      </if>
+      <if test="phoneNumber != null" >
+        PHONE_NUMBER = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNumber != null" >
+        CARD_NUMBER = #{cardNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeDate != null" >
+        RECHARGE_DATE = #{rechargeDate,jdbcType=DATE},
+      </if>
+      <if test="processSerial != null" >
+        PROCESS_SERIAL = #{processSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="payamount != null" >
+        PAYAMOUNT = #{payamount,jdbcType=DECIMAL},
+      </if>
+      <if test="issueDescription != null" >
+        ISSUE_DESCRIPTION = #{issueDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where RECHARGE_SUPPORT_ID = #{rechargeSupportId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.vop.model.RechargeSupportEntity" >
+    update OIP.RECHARGE_SUPPORT_ENTITY
+    set SUPORT_ID = #{suportId,jdbcType=VARCHAR},
+      SUPPORT_CONTENT_ID = #{supportContentId,jdbcType=DECIMAL},
+      PAYING_ARRIVE = #{payingArrive,jdbcType=DECIMAL},
+      PHONE_NUMBER = #{phoneNumber,jdbcType=VARCHAR},
+      CARD_NUMBER = #{cardNumber,jdbcType=VARCHAR},
+      RECHARGE_DATE = #{rechargeDate,jdbcType=DATE},
+      PROCESS_SERIAL = #{processSerial,jdbcType=VARCHAR},
+      PAYAMOUNT = #{payamount,jdbcType=DECIMAL},
+      ISSUE_DESCRIPTION = #{issueDescription,jdbcType=VARCHAR}
+    where RECHARGE_SUPPORT_ID = #{rechargeSupportId,jdbcType=DECIMAL}
+  </update>
+</mapper>

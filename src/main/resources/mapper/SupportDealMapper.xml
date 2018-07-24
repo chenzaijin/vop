@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.vop.dao.mapper.SupportDealMapper" >
+  <resultMap id="BaseResultMap" type="com.example.vop.model.SupportDeal" >
+    <id column="DEAL_ID" property="dealId" jdbcType="DECIMAL" />
+    <result column="SUPORT_ID" property="suportId" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="DEAL_TIME" property="dealTime" jdbcType="TIMESTAMP" />
+    <result column="PHONE_NUMBER" property="phoneNumber" jdbcType="VARCHAR" />
+    <result column="CONTACT" property="contact" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="DEAL_RESULT" property="dealResult" jdbcType="VARCHAR" />
+    <result column="DEAL_MESSAGE" property="dealMessage" jdbcType="VARCHAR" />
+    <result column="API_NAME" property="apiName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DEAL_ID, SUPORT_ID, STATUS, CONTENT, DEAL_TIME, PHONE_NUMBER, CONTACT, REMARK, DEAL_RESULT, 
+    DEAL_MESSAGE, API_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.vop.model.SupportDealExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from OIP.SUPPORT_DEAL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from OIP.SUPPORT_DEAL
+    where DEAL_ID = #{dealId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from OIP.SUPPORT_DEAL
+    where DEAL_ID = #{dealId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.example.vop.model.SupportDeal" >
+    insert into OIP.SUPPORT_DEAL (DEAL_ID, SUPORT_ID, STATUS, 
+      CONTENT, DEAL_TIME, PHONE_NUMBER, 
+      CONTACT, REMARK, DEAL_RESULT, 
+      DEAL_MESSAGE, API_NAME)
+    values (#{dealId,jdbcType=DECIMAL}, #{suportId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{dealTime,jdbcType=TIMESTAMP}, #{phoneNumber,jdbcType=VARCHAR}, 
+      #{contact,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{dealResult,jdbcType=VARCHAR}, 
+      #{dealMessage,jdbcType=VARCHAR}, #{apiName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.vop.model.SupportDeal" >
+    insert into OIP.SUPPORT_DEAL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dealId != null" >
+        DEAL_ID,
+      </if>
+      <if test="suportId != null" >
+        SUPORT_ID,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="dealTime != null" >
+        DEAL_TIME,
+      </if>
+      <if test="phoneNumber != null" >
+        PHONE_NUMBER,
+      </if>
+      <if test="contact != null" >
+        CONTACT,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="dealResult != null" >
+        DEAL_RESULT,
+      </if>
+      <if test="dealMessage != null" >
+        DEAL_MESSAGE,
+      </if>
+      <if test="apiName != null" >
+        API_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dealId != null" >
+        #{dealId,jdbcType=DECIMAL},
+      </if>
+      <if test="suportId != null" >
+        #{suportId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="dealTime != null" >
+        #{dealTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="phoneNumber != null" >
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="dealResult != null" >
+        #{dealResult,jdbcType=VARCHAR},
+      </if>
+      <if test="dealMessage != null" >
+        #{dealMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="apiName != null" >
+        #{apiName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.vop.model.SupportDealExample" resultType="java.lang.Integer" >
+    select count(*) from OIP.SUPPORT_DEAL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.vop.model.SupportDeal" >
+    update OIP.SUPPORT_DEAL
+    <set >
+      <if test="suportId != null" >
+        SUPORT_ID = #{suportId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="dealTime != null" >
+        DEAL_TIME = #{dealTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="phoneNumber != null" >
+        PHONE_NUMBER = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        CONTACT = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="dealResult != null" >
+        DEAL_RESULT = #{dealResult,jdbcType=VARCHAR},
+      </if>
+      <if test="dealMessage != null" >
+        DEAL_MESSAGE = #{dealMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="apiName != null" >
+        API_NAME = #{apiName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DEAL_ID = #{dealId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.vop.model.SupportDeal" >
+    update OIP.SUPPORT_DEAL
+    set SUPORT_ID = #{suportId,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=VARCHAR},
+      DEAL_TIME = #{dealTime,jdbcType=TIMESTAMP},
+      PHONE_NUMBER = #{phoneNumber,jdbcType=VARCHAR},
+      CONTACT = #{contact,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      DEAL_RESULT = #{dealResult,jdbcType=VARCHAR},
+      DEAL_MESSAGE = #{dealMessage,jdbcType=VARCHAR},
+      API_NAME = #{apiName,jdbcType=VARCHAR}
+    where DEAL_ID = #{dealId,jdbcType=DECIMAL}
+  </update>
+</mapper>
