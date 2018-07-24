@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.vop.dao.mapper.NetworkSupportEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.example.vop.model.NetworkSupportEntity" >
+    <id column="NETWORK_SUPPORT_ID" property="networkSupportId" jdbcType="DECIMAL" />
+    <result column="SUPORT_ID" property="suportId" jdbcType="VARCHAR" />
+    <result column="SUPPORT_CONTENT_ID" property="supportContentId" jdbcType="DECIMAL" />
+    <result column="NETWORK_TYPE" property="networkType" jdbcType="DECIMAL" />
+    <result column="SIGNAL" property="signal" jdbcType="DECIMAL" />
+    <result column="SYMPTOM" property="symptom" jdbcType="DECIMAL" />
+    <result column="NOT_CALLING" property="notCalling" jdbcType="DECIMAL" />
+    <result column="ISSUE_DESCRIPTION" property="issueDescription" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    NETWORK_SUPPORT_ID, SUPORT_ID, SUPPORT_CONTENT_ID, NETWORK_TYPE, SIGNAL, SYMPTOM, 
+    NOT_CALLING, ISSUE_DESCRIPTION
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.vop.model.NetworkSupportEntityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from OIP.NETWORK_SUPPORT_ENTITY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from OIP.NETWORK_SUPPORT_ENTITY
+    where NETWORK_SUPPORT_ID = #{networkSupportId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from OIP.NETWORK_SUPPORT_ENTITY
+    where NETWORK_SUPPORT_ID = #{networkSupportId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.example.vop.model.NetworkSupportEntity" >
+    insert into OIP.NETWORK_SUPPORT_ENTITY (NETWORK_SUPPORT_ID, SUPORT_ID, SUPPORT_CONTENT_ID, 
+      NETWORK_TYPE, SIGNAL, SYMPTOM, 
+      NOT_CALLING, ISSUE_DESCRIPTION)
+    values (#{networkSupportId,jdbcType=DECIMAL}, #{suportId,jdbcType=VARCHAR}, #{supportContentId,jdbcType=DECIMAL}, 
+      #{networkType,jdbcType=DECIMAL}, #{signal,jdbcType=DECIMAL}, #{symptom,jdbcType=DECIMAL}, 
+      #{notCalling,jdbcType=DECIMAL}, #{issueDescription,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.vop.model.NetworkSupportEntity" >
+    insert into OIP.NETWORK_SUPPORT_ENTITY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="networkSupportId != null" >
+        NETWORK_SUPPORT_ID,
+      </if>
+      <if test="suportId != null" >
+        SUPORT_ID,
+      </if>
+      <if test="supportContentId != null" >
+        SUPPORT_CONTENT_ID,
+      </if>
+      <if test="networkType != null" >
+        NETWORK_TYPE,
+      </if>
+      <if test="signal != null" >
+        SIGNAL,
+      </if>
+      <if test="symptom != null" >
+        SYMPTOM,
+      </if>
+      <if test="notCalling != null" >
+        NOT_CALLING,
+      </if>
+      <if test="issueDescription != null" >
+        ISSUE_DESCRIPTION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="networkSupportId != null" >
+        #{networkSupportId,jdbcType=DECIMAL},
+      </if>
+      <if test="suportId != null" >
+        #{suportId,jdbcType=VARCHAR},
+      </if>
+      <if test="supportContentId != null" >
+        #{supportContentId,jdbcType=DECIMAL},
+      </if>
+      <if test="networkType != null" >
+        #{networkType,jdbcType=DECIMAL},
+      </if>
+      <if test="signal != null" >
+        #{signal,jdbcType=DECIMAL},
+      </if>
+      <if test="symptom != null" >
+        #{symptom,jdbcType=DECIMAL},
+      </if>
+      <if test="notCalling != null" >
+        #{notCalling,jdbcType=DECIMAL},
+      </if>
+      <if test="issueDescription != null" >
+        #{issueDescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.vop.model.NetworkSupportEntityExample" resultType="java.lang.Integer" >
+    select count(*) from OIP.NETWORK_SUPPORT_ENTITY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.vop.model.NetworkSupportEntity" >
+    update OIP.NETWORK_SUPPORT_ENTITY
+    <set >
+      <if test="suportId != null" >
+        SUPORT_ID = #{suportId,jdbcType=VARCHAR},
+      </if>
+      <if test="supportContentId != null" >
+        SUPPORT_CONTENT_ID = #{supportContentId,jdbcType=DECIMAL},
+      </if>
+      <if test="networkType != null" >
+        NETWORK_TYPE = #{networkType,jdbcType=DECIMAL},
+      </if>
+      <if test="signal != null" >
+        SIGNAL = #{signal,jdbcType=DECIMAL},
+      </if>
+      <if test="symptom != null" >
+        SYMPTOM = #{symptom,jdbcType=DECIMAL},
+      </if>
+      <if test="notCalling != null" >
+        NOT_CALLING = #{notCalling,jdbcType=DECIMAL},
+      </if>
+      <if test="issueDescription != null" >
+        ISSUE_DESCRIPTION = #{issueDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where NETWORK_SUPPORT_ID = #{networkSupportId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.vop.model.NetworkSupportEntity" >
+    update OIP.NETWORK_SUPPORT_ENTITY
+    set SUPORT_ID = #{suportId,jdbcType=VARCHAR},
+      SUPPORT_CONTENT_ID = #{supportContentId,jdbcType=DECIMAL},
+      NETWORK_TYPE = #{networkType,jdbcType=DECIMAL},
+      SIGNAL = #{signal,jdbcType=DECIMAL},
+      SYMPTOM = #{symptom,jdbcType=DECIMAL},
+      NOT_CALLING = #{notCalling,jdbcType=DECIMAL},
+      ISSUE_DESCRIPTION = #{issueDescription,jdbcType=VARCHAR}
+    where NETWORK_SUPPORT_ID = #{networkSupportId,jdbcType=DECIMAL}
+  </update>
+</mapper>
