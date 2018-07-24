@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.vop.dao.mapper.AttachmentEntityMapper" >
-  <resultMap id="BaseResultMap" type="com.example.vop.model.AttachmentEntity" >
+<mapper namespace="com.example.vop.dao.mapper.SupportAttachmentEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.example.vop.model.SupportAttachmentEntity" >
     <id column="ATTACHMENT_ID" property="attachmentId" jdbcType="DECIMAL" />
     <result column="SUPPORT_ID" property="supportId" jdbcType="VARCHAR" />
     <result column="DEAL_ID" property="dealId" jdbcType="DECIMAL" />
@@ -41,14 +41,14 @@
   <sql id="Base_Column_List" >
     ATTACHMENT_ID, SUPPORT_ID, DEAL_ID, PUSH_ID, FILE_NAME, FILE_PATH
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.vop.model.AttachmentEntityExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.vop.model.SupportAttachmentEntityExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from OIP.ATTACHMENT_ENTITY
+    from OIP.SUPPORT_ATTACHMENT_ENTITY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -59,23 +59,23 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from OIP.ATTACHMENT_ENTITY
+    from OIP.SUPPORT_ATTACHMENT_ENTITY
     where ATTACHMENT_ID = #{attachmentId,jdbcType=DECIMAL}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from OIP.ATTACHMENT_ENTITY
+    delete from OIP.SUPPORT_ATTACHMENT_ENTITY
     where ATTACHMENT_ID = #{attachmentId,jdbcType=DECIMAL}
   </delete>
-  <insert id="insert" parameterType="com.example.vop.model.AttachmentEntity" >
-    insert into OIP.ATTACHMENT_ENTITY (ATTACHMENT_ID, SUPPORT_ID, DEAL_ID, 
+  <insert id="insert" parameterType="com.example.vop.model.SupportAttachmentEntity" >
+    insert into OIP.SUPPORT_ATTACHMENT_ENTITY (ATTACHMENT_ID, SUPPORT_ID, DEAL_ID, 
       PUSH_ID, FILE_NAME, FILE_PATH
       )
     values (#{attachmentId,jdbcType=DECIMAL}, #{supportId,jdbcType=VARCHAR}, #{dealId,jdbcType=DECIMAL}, 
       #{pushId,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.example.vop.model.AttachmentEntity" >
-    insert into OIP.ATTACHMENT_ENTITY
+  <insert id="insertSelective" parameterType="com.example.vop.model.SupportAttachmentEntity" >
+    insert into OIP.SUPPORT_ATTACHMENT_ENTITY
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="attachmentId != null" >
         ATTACHMENT_ID,
@@ -117,14 +117,14 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.vop.model.AttachmentEntityExample" resultType="java.lang.Integer" >
-    select count(*) from OIP.ATTACHMENT_ENTITY
+  <select id="countByExample" parameterType="com.example.vop.model.SupportAttachmentEntityExample" resultType="java.lang.Integer" >
+    select count(*) from OIP.SUPPORT_ATTACHMENT_ENTITY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.vop.model.AttachmentEntity" >
-    update OIP.ATTACHMENT_ENTITY
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.vop.model.SupportAttachmentEntity" >
+    update OIP.SUPPORT_ATTACHMENT_ENTITY
     <set >
       <if test="supportId != null" >
         SUPPORT_ID = #{supportId,jdbcType=VARCHAR},
@@ -144,8 +144,8 @@
     </set>
     where ATTACHMENT_ID = #{attachmentId,jdbcType=DECIMAL}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.vop.model.AttachmentEntity" >
-    update OIP.ATTACHMENT_ENTITY
+  <update id="updateByPrimaryKey" parameterType="com.example.vop.model.SupportAttachmentEntity" >
+    update OIP.SUPPORT_ATTACHMENT_ENTITY
     set SUPPORT_ID = #{supportId,jdbcType=VARCHAR},
       DEAL_ID = #{dealId,jdbcType=DECIMAL},
       PUSH_ID = #{pushId,jdbcType=VARCHAR},
