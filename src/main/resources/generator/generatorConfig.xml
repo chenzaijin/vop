@@ -75,10 +75,9 @@
                enableCountByExample="true" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false"></table>
         <table schema="oip" tableName="account_support_entity" domainObjectName="AccountSupportEntity"
                enableCountByExample="true" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false"></table>
+        <table schema="oip" tableName="attachment_entity" domainObjectName="AttachmentEntity"
+               enableCountByExample="true" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false"></table>
         <table schema="oip" tableName="mishu_support_entity" domainObjectName="MishuSupportEntity"
                enableCountByExample="true" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false"></table>
-        <table schema="oip" tableName="support_attachment_entity" domainObjectName="SupportAttachmentEntity"
-               enableCountByExample="true" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false"></table>
-
     </context>
 </generatorConfiguration>

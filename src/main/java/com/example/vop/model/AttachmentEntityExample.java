@@ -3,14 +3,14 @@ package com.example.vop.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SupportAttachmentEntityExample {
+public class AttachmentEntityExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public SupportAttachmentEntityExample() {
+    public AttachmentEntityExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
